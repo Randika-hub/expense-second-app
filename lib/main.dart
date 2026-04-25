@@ -1,7 +1,10 @@
-import 'package:expenseapp/screens/on_boarding_screens.dart';
+import 'package:expenseapp/on_bording_screens_full_files/screens/on_boarding_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 

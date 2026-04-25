@@ -1,4 +1,4 @@
-import 'package:expenseapp/models%20and%20data/models/on_boarding_screens_model.dart';
+import 'package:expenseapp/on_bording_screens_full_files/models%20and%20data/models/on_boarding_screens_model.dart';
 
 class OnBoardingScreensData {
   static final List<OnBoardingScreensModel> onBoardingScreensData = [

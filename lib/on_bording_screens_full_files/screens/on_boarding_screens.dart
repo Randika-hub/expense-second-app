@@ -1,7 +1,7 @@
-import 'package:expenseapp/models%20and%20data/data/on_boarding_screens_data.dart';
-import 'package:expenseapp/screens/onboarding_first_screen/on_board_firs_screen.dart';
-import 'package:expenseapp/screens/user_input_data.dart';
-import 'package:expenseapp/widgets/on_boarding_button.dart';
+import 'package:expenseapp/on_bording_screens_full_files/models%20and%20data/data/on_boarding_screens_data.dart';
+import 'package:expenseapp/on_bording_screens_full_files/screens/onboarding_first_screen/on_board_firs_screen.dart';
+import 'package:expenseapp/on_bording_screens_full_files/screens/user_input_data.dart';
+import 'package:expenseapp/on_bording_screens_full_files/widgets/on_boarding_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
