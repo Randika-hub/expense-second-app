@@ -1,4 +1,5 @@
-import 'package:expenseapp/on_bording_screens_full_files/screens/on_boarding_screens.dart';
+import 'package:expenseapp/user_services/user_services.dart';
+import 'package:expenseapp/widgets/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,10 +14,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'expense',
-      debugShowCheckedModeBanner: false,
-      home: OnBoardingScreens(),
+    return FutureBuilder(
+      future: UserServices.ChekUserName(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else {
+          bool hasUserData = snapshot.data ?? false;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'test',
+            home: Wrapper(showMainScreen: hasUserData),
+          );
+        }
+      },
     );
   }
 }
