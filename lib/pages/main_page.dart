@@ -16,9 +16,10 @@ class _MainPageState extends State<MainPage> {
   int _currentindex = 0;
 
   final List<Widget> _pages = [
+    const AddNewPage(),
     const HomePage(),
     const TransectionPage(),
-    const AddNewPage(),
+
     const BudgetPage(),
     const ProfilePage(),
   ];
