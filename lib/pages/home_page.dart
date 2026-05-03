@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 //sub bg color Column
                 SizedBox(
-                  height: 200,
+                  height: MediaQuery.of(context).size.height * 0.3,
                   width: double.infinity,
 
                   child: Container(
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30),
                       ),
-                      color: Colors.purple.shade200,
+                      color: Colors.purple.shade100,
                     ),
 
                     child: Padding(
@@ -68,7 +68,8 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.asset(
                                     "assets/images/user.jpg",
                                     fit: BoxFit.cover,
-                                    width: 60,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
                                   ),
                                 ),
                               ),

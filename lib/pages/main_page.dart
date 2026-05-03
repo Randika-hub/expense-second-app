@@ -32,7 +32,6 @@ class _MainPageState extends State<MainPage> {
         onTap: (index) {
           setState(() {
             _currentindex = index;
-            print(_currentindex);
           });
         },
         type: BottomNavigationBarType.fixed,

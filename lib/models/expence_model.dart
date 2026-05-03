@@ -20,20 +20,48 @@ final Map<ExpenceCatogory, Color> expenceCatogoryColor = {
 
 class ExpenceModel {
   final ExpenceCatogory expenceCatogory;
-  final int ExpenceId;
-  final String ExpenceTitle;
-  final String ExpenceDescription;
-  final double ExpenceAmount;
-  final DateTime ExpenceDate;
-  final DateTime ExpenceTime;
+  final int expenceId;
+  final String expenceTitle;
+  final String expenceDescription;
+  final double expenceAmount;
+  final DateTime expenceDate;
+  final DateTime expenceTime;
 
   ExpenceModel({
     required this.expenceCatogory,
-    required this.ExpenceId,
-    required this.ExpenceTitle,
-    required this.ExpenceDescription,
-    required this.ExpenceAmount,
-    required this.ExpenceDate,
-    required this.ExpenceTime,
+    required this.expenceId,
+    required this.expenceTitle,
+    required this.expenceDescription,
+    required this.expenceAmount,
+    required this.expenceDate,
+    required this.expenceTime,
   });
+
+  //save the data in shard prefereces
+
+  //json serealization for create a conver to dart data convert into json format
+  Map<String, dynamic> tojson() {
+    return {
+      "expenceCatogory": expenceCatogory.index,
+      "expenceId": expenceId,
+      "expenceTitle": expenceTitle,
+      "expenceDescription": expenceDescription,
+      "expenceAmount": expenceAmount,
+      "expenceDate": expenceDate.toIso8601String(),
+      "expenceTime": expenceTime.toIso8601String(),
+    };
+  }
+
+  //created a methred json data convert into a dart object data,
+  factory ExpenceModel.fromJson(Map<String, dynamic> json) {
+    return ExpenceModel(
+      expenceCatogory: ExpenceCatogory.values[json["expenceCatogory"]],
+      expenceId: json["expenceId"],
+      expenceTitle: json["expenceTitle"],
+      expenceDescription: json["expenceDescription"],
+      expenceAmount: json["expenceAmount"],
+      expenceDate: DateTime.parse(json["expenceDate"]),
+      expenceTime: DateTime.parse(json["expenceTime"]),
+    );
+  }
 }

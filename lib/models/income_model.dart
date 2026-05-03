@@ -19,7 +19,7 @@ final Map<EncomeCatogory, Color> encomeCatogoryColor = {
   EncomeCatogory.other: Colors.orange,
 };
 
-class IncomeModel {
+class EncomeModel {
   final EncomeCatogory catogory;
   final int id;
   final String title;
@@ -28,7 +28,7 @@ class IncomeModel {
   final DateTime date;
   final DateTime time;
 
-  IncomeModel({
+  EncomeModel({
     required this.catogory,
     required this.id,
     required this.title,
@@ -37,4 +37,30 @@ class IncomeModel {
     required this.time,
     required this.amount,
   });
+
+  //json serealization for create a conver to dart data convert into json format
+  Map<String, dynamic> tojson() {
+    return {
+      "catogory": catogory.index,
+      "id": id,
+      "title": title,
+      "description": description,
+      "amount": amount,
+      "date": date.toIso8601String(),
+      "time": time.toIso8601String(),
+    };
+  }
+
+  //created a methred json data convert into a dart object data,
+  factory EncomeModel.fromJson(Map<String, dynamic> json) {
+    return EncomeModel(
+      catogory: EncomeCatogory.values[json["expenceCatogory"]],
+      id: json["id"],
+      title: json["title"],
+      description: json[" description"],
+      amount: json["amount"],
+      date: json["date"],
+      time: json["time"],
+    );
+  }
 }
