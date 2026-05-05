@@ -13,15 +13,15 @@ final Map<EncomeCatogory, String> incomeCatogoryImages = {
 
 //income catogory Color
 final Map<EncomeCatogory, Color> encomeCatogoryColor = {
-  EncomeCatogory.salary: Colors.black,
-  EncomeCatogory.freelancing: Colors.red,
-  EncomeCatogory.passive: Colors.yellow,
-  EncomeCatogory.other: Colors.orange,
+  EncomeCatogory.salary: Colors.greenAccent.shade100,
+  EncomeCatogory.freelancing: Colors.red.shade200,
+  EncomeCatogory.passive: Colors.yellow.shade200,
+  EncomeCatogory.other: Colors.pink.shade200,
 };
 
 class EncomeModel {
   final EncomeCatogory catogory;
-  final int id;
+
   final String title;
   final String description;
   final double amount;
@@ -30,7 +30,7 @@ class EncomeModel {
 
   EncomeModel({
     required this.catogory,
-    required this.id,
+
     required this.title,
     required this.description,
     required this.date,
@@ -42,7 +42,7 @@ class EncomeModel {
   Map<String, dynamic> tojson() {
     return {
       "catogory": catogory.index,
-      "id": id,
+
       "title": title,
       "description": description,
       "amount": amount,
@@ -55,7 +55,7 @@ class EncomeModel {
   factory EncomeModel.fromJson(Map<String, dynamic> json) {
     return EncomeModel(
       catogory: EncomeCatogory.values[json["expenceCatogory"]],
-      id: json["id"],
+
       title: json["title"],
       description: json[" description"],
       amount: json["amount"],

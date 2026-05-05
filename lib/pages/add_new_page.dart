@@ -5,7 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddNewPage extends StatefulWidget {
-  const AddNewPage({super.key});
+  final Function(EncomeModel) encomeAdd;
+  final Function(ExpenceModel) expenceAdd;
+  const AddNewPage({
+    super.key,
+    required this.expenceAdd,
+    required this.encomeAdd,
+  });
 
   @override
   State<AddNewPage> createState() => _AddNewPageState();
@@ -36,6 +42,9 @@ class _AddNewPageState extends State<AddNewPage> {
     amountController.dispose();
     super.dispose();
   }
+
+  //form key
+  final _key = GlobalKey<FormState>();
 
   //Show date picker for varible
   DateTime _selectedDate = DateTime.now();
@@ -198,6 +207,7 @@ class _AddNewPageState extends State<AddNewPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Form(
+                        key: _key,
                         child: Column(
                           children: [
                             DropdownButtonFormField(
@@ -236,6 +246,12 @@ class _AddNewPageState extends State<AddNewPage> {
                             ),
                             sizeSpacerHeight1,
                             TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "please enter a value";
+                                }
+                                return null;
+                              },
                               controller: titleController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -250,6 +266,12 @@ class _AddNewPageState extends State<AddNewPage> {
                             //description textForm feild
                             sizeSpacerHeight1,
                             TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "please enter a value";
+                                }
+                                return null;
+                              },
                               controller: descriptionController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -264,6 +286,12 @@ class _AddNewPageState extends State<AddNewPage> {
                             //Amount textform Field
                             sizeSpacerHeight1,
                             TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "please enter your amount";
+                                }
+                                return null;
+                              },
                               controller: amountController,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
@@ -405,24 +433,67 @@ class _AddNewPageState extends State<AddNewPage> {
                             sizeSpacerHeight1,
                             const Divider(color: Colors.grey, thickness: 3),
                             sizeSpacerHeight2,
+
+                            ///
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: _changeIncomeAndExpencePage == 0
-                                      ? Colors.red
-                                      : Colors.green,
-                                ),
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.08,
-                                child: const Center(
-                                  child: Text(
-                                    'Add',
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold,
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (_key.currentState!.validate()) {
+                                    if (_changeIncomeAndExpencePage == 0) {
+                                      // 1. Expense එක සාදා එකතු කිරීම
+                                      ExpenceModel expencelist = ExpenceModel(
+                                        expenceCatogory:
+                                            defaulSelectCatogoryExpence,
+                                        expenceTitle: titleController.text,
+                                        expenceDescription:
+                                            descriptionController.text,
+                                        expenceAmount: double.parse(
+                                          amountController.text.trim(),
+                                        ),
+                                        expenceDate: _selectedDate,
+                                        expenceTime: _selectedTime,
+                                      );
+                                      widget.expenceAdd(expencelist);
+                                    } else {
+                                      // 2. Income එක සාදා එකතු කිරීම
+                                      EncomeModel encomeList = EncomeModel(
+                                        catogory: defaulSelectCatogoryEncome,
+                                        title: titleController.text,
+                                        description: descriptionController.text,
+                                        date: _selectedDate,
+                                        time: _selectedTime,
+                                        amount: double.parse(
+                                          amountController.text.trim(),
+                                        ),
+                                      );
+                                      widget.encomeAdd(encomeList);
+                                    }
+
+                                    // 3. ඊට පස්සේ සියලුම controllers clear කිරීම
+                                    titleController.clear();
+                                    amountController.clear();
+                                    descriptionController.clear();
+                                  }
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: _changeIncomeAndExpencePage == 0
+                                        ? Colors.red
+                                        : Colors.green,
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.08,
+                                  child: const Center(
+                                    child: Text(
+                                      'Add',
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -1,3 +1,5 @@
+import 'package:expenseapp/models/expence_model.dart';
+import 'package:expenseapp/models/income_model.dart';
 import 'package:expenseapp/pages/add_new_page.dart';
 import 'package:expenseapp/pages/budget_page.dart';
 import 'package:expenseapp/pages/home_page.dart';
@@ -14,21 +16,34 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentindex = 0;
+  final List<ExpenceModel> expenceList = [];
+  final List<EncomeModel> encomeList = [];
 
-  final List<Widget> _pages = [
-    const AddNewPage(),
-    const HomePage(),
-    const TransectionPage(),
+  void onGarrige(ExpenceModel car) {
+    setState(() {
+      expenceList.add(car);
+    });
+  }
 
-    const BudgetPage(),
-    const ProfilePage(),
-  ];
+  void encomeGariige(EncomeModel income) {
+    setState(() {
+      encomeList.add(income);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      const HomePage(),
+      TransectionPage(expenceList: expenceList, encomeList: encomeList),
+      AddNewPage(expenceAdd: onGarrige, encomeAdd: encomeGariige),
+      const BudgetPage(),
+      const ProfilePage(),
+    ];
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
+
         onTap: (index) {
           setState(() {
             _currentindex = index;
@@ -73,7 +88,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: _pages[_currentindex],
+      body: pages[_currentindex],
     );
   }
 }

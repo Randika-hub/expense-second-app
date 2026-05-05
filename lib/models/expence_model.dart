@@ -11,16 +11,16 @@ final Map<ExpenceCatogory, String> expenceCatogoryImages = {
 };
 
 final Map<ExpenceCatogory, Color> expenceCatogoryColor = {
-  ExpenceCatogory.shopping: Colors.deepOrange,
-  ExpenceCatogory.subscriptions: Colors.blue,
-  ExpenceCatogory.food: Colors.red,
-  ExpenceCatogory.health: Colors.greenAccent,
-  ExpenceCatogory.transport: Colors.yellow,
+  ExpenceCatogory.shopping: Colors.orange.shade200,
+  ExpenceCatogory.subscriptions: Colors.blue.shade200,
+  ExpenceCatogory.food: Colors.lightGreenAccent.shade200,
+  ExpenceCatogory.health: Colors.greenAccent.shade200,
+  ExpenceCatogory.transport: Colors.yellow.shade200,
 };
 
 class ExpenceModel {
   final ExpenceCatogory expenceCatogory;
-  final int expenceId;
+
   final String expenceTitle;
   final String expenceDescription;
   final double expenceAmount;
@@ -29,7 +29,7 @@ class ExpenceModel {
 
   ExpenceModel({
     required this.expenceCatogory,
-    required this.expenceId,
+
     required this.expenceTitle,
     required this.expenceDescription,
     required this.expenceAmount,
@@ -43,7 +43,7 @@ class ExpenceModel {
   Map<String, dynamic> tojson() {
     return {
       "expenceCatogory": expenceCatogory.index,
-      "expenceId": expenceId,
+
       "expenceTitle": expenceTitle,
       "expenceDescription": expenceDescription,
       "expenceAmount": expenceAmount,
@@ -56,7 +56,7 @@ class ExpenceModel {
   factory ExpenceModel.fromJson(Map<String, dynamic> json) {
     return ExpenceModel(
       expenceCatogory: ExpenceCatogory.values[json["expenceCatogory"]],
-      expenceId: json["expenceId"],
+
       expenceTitle: json["expenceTitle"],
       expenceDescription: json["expenceDescription"],
       expenceAmount: json["expenceAmount"],
