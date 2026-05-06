@@ -31,7 +31,7 @@ class _TransectionPageState extends State<TransectionPage> {
               const Text(
                 "See your financila report",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 30, 54, 233),
+                  color: Color.fromARGB(255, 240, 4, 99),
                   fontSize: 20,
                 ),
               ),
@@ -41,7 +41,7 @@ class _TransectionPageState extends State<TransectionPage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: widget.expenceList.length,
                   itemBuilder: (context, index) {
@@ -64,7 +64,7 @@ class _TransectionPageState extends State<TransectionPage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: widget.encomeList.length,
                   itemBuilder: (context, index) {

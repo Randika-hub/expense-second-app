@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+
+part 'expence_model.g.dart';
 
 enum ExpenceCatogory { shopping, subscriptions, food, health, transport }
 
@@ -18,50 +21,60 @@ final Map<ExpenceCatogory, Color> expenceCatogoryColor = {
   ExpenceCatogory.transport: Colors.yellow.shade200,
 };
 
+@HiveType(typeId: 1)
 class ExpenceModel {
-  final ExpenceCatogory expenceCatogory;
-
+  @HiveField(0)
   final String expenceTitle;
+
+  @HiveField(1)
   final String expenceDescription;
+
+  @HiveField(2)
   final double expenceAmount;
+
+  @HiveField(3)
   final DateTime expenceDate;
+
+  @HiveField(4)
   final DateTime expenceTime;
 
-  ExpenceModel({
-    required this.expenceCatogory,
+  @HiveField(5)
+  final ExpenceCatogory expenceCatogory;
 
+  ExpenceModel({
     required this.expenceTitle,
     required this.expenceDescription,
     required this.expenceAmount,
     required this.expenceDate,
     required this.expenceTime,
+    required this.expenceCatogory,
   });
 
   //save the data in shard prefereces
 
-  //json serealization for create a conver to dart data convert into json format
-  Map<String, dynamic> tojson() {
-    return {
-      "expenceCatogory": expenceCatogory.index,
+  // //json serealization for create a conver to dart data convert into json format
+  // Map<String, dynamic> tojson() {
+  //   return {
+  //     "expenceCatogory": expenceCatogory.index,
 
-      "expenceTitle": expenceTitle,
-      "expenceDescription": expenceDescription,
-      "expenceAmount": expenceAmount,
-      "expenceDate": expenceDate.toIso8601String(),
-      "expenceTime": expenceTime.toIso8601String(),
-    };
-  }
+  //     "expenceTitle": expenceTitle,
+  //     "expenceDescription": expenceDescription,
+  //     "expenceAmount": expenceAmount,
+  //     "expenceDate": expenceDate.toIso8601String(),
+  //     "expenceTime": expenceTime.toIso8601String(),
+  //   };
+  // }
 
-  //created a methred json data convert into a dart object data,
-  factory ExpenceModel.fromJson(Map<String, dynamic> json) {
-    return ExpenceModel(
-      expenceCatogory: ExpenceCatogory.values[json["expenceCatogory"]],
+  // //created a methred json data convert into a dart object data,
+  // factory ExpenceModel.fromJson(Map<String, dynamic> json) {
+  //   return ExpenceModel(
+  //     expenceCatogory: ExpenceCatogory.values[json["expenceCatogory"]],
 
-      expenceTitle: json["expenceTitle"],
-      expenceDescription: json["expenceDescription"],
-      expenceAmount: json["expenceAmount"],
-      expenceDate: DateTime.parse(json["expenceDate"]),
-      expenceTime: DateTime.parse(json["expenceTime"]),
-    );
-  }
+  //     expenceTitle: json["expenceTitle"],
+  //     expenceDescription: json["expenceDescription"],
+  //     expenceAmount: json["expenceAmount"],
+  //     expenceDate: DateTime.parse(json["expenceDate"]),
+  //     expenceTime: DateTime.parse(json["expenceTime"]),
+  //   );
+  // }
 }
