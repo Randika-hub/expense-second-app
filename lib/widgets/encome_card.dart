@@ -24,15 +24,22 @@ class EncomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: encomeCatogoryColor[catogory],
+      elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image.asset(
-              incomeCatogoryImages[catogory]!,
-              fit: BoxFit.cover,
-              width: 60,
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: encomeCatogoryColor[catogory],
+              ),
+              child: Image.asset(
+                incomeCatogoryImages[catogory]!,
+                fit: BoxFit.cover,
+                width: 60,
+              ),
             ),
             sizeSpacerHeight2,
             Padding(

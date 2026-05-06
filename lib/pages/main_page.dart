@@ -45,6 +45,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  //for add the expences for list database
   void onGarrige(ExpenceModel car) {
     setState(() {
       db.expenceList.add(car);
@@ -52,11 +53,62 @@ class _MainPageState extends State<MainPage> {
     db.updateTheData(context);
   }
 
+  //for remove the expences frome list
+  void removeExpence(ExpenceModel expence) {
+    final currentExpenceIndex = db.expenceList.indexOf(expence);
+
+    setState(() {
+      db.expenceList.remove(expence);
+    });
+    db.updateTheData(context);
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text("Expence was deleted!"),
+        action: SnackBarAction(
+          label: "undo",
+          onPressed: () {
+            setState(() {
+              db.expenceList.insert(currentExpenceIndex, expence);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  //for add the encome to list database
   void encomeGariige(EncomeModel income) {
     setState(() {
       incomedb.encomeList.add(income);
     });
     incomedb.updateTheData(context);
+  }
+
+  //for delete the income methods
+  void encomeDelete(EncomeModel encome) {
+    final currentIncomeIndex = incomedb.encomeList.indexOf(encome);
+
+    setState(() {
+      incomedb.encomeList.remove(encome);
+    });
+    incomedb.updateTheData(context);
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text("encome was deleted!"),
+        action: SnackBarAction(
+          label: "undo",
+          onPressed: () {
+            setState(() {
+              incomedb.encomeList.insert(currentIncomeIndex, encome);
+            });
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -66,6 +118,8 @@ class _MainPageState extends State<MainPage> {
       TransectionPage(
         expenceList: db.expenceList,
         encomeList: incomedb.encomeList,
+        encomeDelete: encomeDelete,
+        expenceDelete: removeExpence,
       ),
       AddNewPage(expenceAdd: onGarrige, encomeAdd: encomeGariige),
       const BudgetPage(),

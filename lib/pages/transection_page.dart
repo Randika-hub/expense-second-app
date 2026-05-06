@@ -6,12 +6,16 @@ import 'package:expenseapp/widgets/encome_card.dart';
 import 'package:flutter/material.dart';
 
 class TransectionPage extends StatefulWidget {
+  final Function(ExpenceModel) expenceDelete;
+  final Function(EncomeModel) encomeDelete;
   final List<EncomeModel> encomeList;
   final List<ExpenceModel> expenceList;
   const TransectionPage({
     super.key,
     required this.expenceList,
     required this.encomeList,
+    required this.encomeDelete,
+    required this.expenceDelete,
   });
 
   @override
@@ -46,13 +50,20 @@ class _TransectionPageState extends State<TransectionPage> {
                   itemCount: widget.expenceList.length,
                   itemBuilder: (context, index) {
                     final expence = widget.expenceList[index];
-                    return ExpenceCard(
-                      expenceCatogory: expence.expenceCatogory,
-                      expenceTitle: expence.expenceTitle,
-                      expenceDescription: expence.expenceDescription,
-                      expenceAmount: expence.expenceAmount,
-                      expenceDate: expence.expenceDate,
-                      expenceTime: expence.expenceTime,
+                    return Dismissible(
+                      key: ValueKey(expence),
+                      direction: DismissDirection.startToEnd,
+                      onDismissed: (direction) {
+                        widget.expenceDelete(expence);
+                      },
+                      child: ExpenceCard(
+                        expenceCatogory: expence.expenceCatogory,
+                        expenceTitle: expence.expenceTitle,
+                        expenceDescription: expence.expenceDescription,
+                        expenceAmount: expence.expenceAmount,
+                        expenceDate: expence.expenceDate,
+                        expenceTime: expence.expenceTime,
+                      ),
                     );
                   },
                 ),
@@ -69,13 +80,20 @@ class _TransectionPageState extends State<TransectionPage> {
                   itemCount: widget.encomeList.length,
                   itemBuilder: (context, index) {
                     final encome = widget.encomeList[index];
-                    return EncomeCard(
-                      catogory: encome.catogory,
-                      title: encome.title,
-                      description: encome.description,
-                      amount: encome.amount,
-                      date: encome.date,
-                      time: encome.time,
+                    return Dismissible(
+                      key: ValueKey(encome),
+                      direction: DismissDirection.startToEnd,
+                      onDismissed: (direction) {
+                        widget.encomeDelete(encome);
+                      },
+                      child: EncomeCard(
+                        catogory: encome.catogory,
+                        title: encome.title,
+                        description: encome.description,
+                        amount: encome.amount,
+                        date: encome.date,
+                        time: encome.time,
+                      ),
                     );
                   },
                 ),

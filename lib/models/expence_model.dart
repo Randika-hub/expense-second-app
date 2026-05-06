@@ -14,11 +14,11 @@ final Map<ExpenceCatogory, String> expenceCatogoryImages = {
 };
 
 final Map<ExpenceCatogory, Color> expenceCatogoryColor = {
-  ExpenceCatogory.shopping: Colors.orange.shade200,
-  ExpenceCatogory.subscriptions: Colors.blue.shade200,
-  ExpenceCatogory.food: Colors.lightGreenAccent.shade200,
-  ExpenceCatogory.health: Colors.greenAccent.shade200,
-  ExpenceCatogory.transport: Colors.yellow.shade200,
+  ExpenceCatogory.shopping: const Color.fromARGB(255, 100, 234, 88),
+  ExpenceCatogory.subscriptions: const Color.fromARGB(255, 113, 173, 221),
+  ExpenceCatogory.food: const Color.fromARGB(255, 103, 103, 218),
+  ExpenceCatogory.health: const Color.fromARGB(255, 200, 125, 213),
+  ExpenceCatogory.transport: const Color.fromARGB(255, 71, 235, 221),
 };
 
 @HiveType(typeId: 1)
