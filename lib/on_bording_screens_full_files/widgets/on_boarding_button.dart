@@ -13,13 +13,14 @@ class OnBoardingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.07,
+      height: MediaQuery.of(context).size.height * 0.06,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: buttonColor,
       ),
       child: Center(
         child: Text(
+          textAlign: TextAlign.center,
           buttonName,
           style: const TextStyle(
             fontWeight: FontWeight.bold,

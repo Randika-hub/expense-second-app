@@ -17,10 +17,10 @@ final Map<EncomeCatogory, String> incomeCatogoryImages = {
 
 //income catogory Color
 final Map<EncomeCatogory, Color> encomeCatogoryColor = {
-  EncomeCatogory.salary: Colors.greenAccent.shade100,
-  EncomeCatogory.freelancing: Colors.red.shade200,
-  EncomeCatogory.passive: Colors.yellow.shade200,
-  EncomeCatogory.other: Colors.pink.shade200,
+  EncomeCatogory.salary: const Color.fromARGB(255, 37, 221, 89),
+  EncomeCatogory.freelancing: const Color.fromARGB(255, 227, 32, 32),
+  EncomeCatogory.passive: const Color.fromARGB(255, 225, 208, 54),
+  EncomeCatogory.other: const Color.fromARGB(255, 22, 16, 217),
 };
 
 @HiveType(typeId: 3)

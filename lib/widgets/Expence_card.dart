@@ -73,26 +73,39 @@ class ExpenceCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Text(
-                    "+ \$ $expenceAmount",
-                    style: const TextStyle(
-                      color: Color.fromRGBO(255, 11, 35, 214),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 95,
+                      height: 35,
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Text(
+                          "+ \$ $expenceAmount  ",
+                          style: const TextStyle(
+                            color: Color.fromRGBO(255, 11, 35, 214),
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            //textBaseline: TextBaseline.alphabetic,
+                          ),
+
+                          // overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    DateFormat.jm().format(expenceTime),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+
+                    Text(
+                      DateFormat.jm().format(expenceTime),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

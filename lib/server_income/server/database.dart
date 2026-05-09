@@ -10,14 +10,14 @@ class IncomeDatabase {
   //initial data when open the app
   void initialData() {
     encomeList = [
-      EncomeModel(
-        title: 'app',
-        description: "develop the app",
-        date: DateTime.now(),
-        time: DateTime.now(),
-        amount: 1500,
-        catogory: EncomeCatogory.other,
-      ),
+      // EncomeModel(
+      //   title: 'app',
+      //   description: "develop the app",
+      //   date: DateTime.now(),
+      //   time: DateTime.now(),
+      //   amount: 1500,
+      //   catogory: EncomeCatogory.other,
+      // ),
     ];
   }
 
@@ -39,6 +39,19 @@ class IncomeDatabase {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("save your income in data base")),
       );
+    }
+  }
+
+  Future<void> removeEncomesaHiveDataBase(BuildContext context) async {
+    var mybox = Hive.box("EncomeDataBase");
+    await mybox.clear();
+
+    encomeList.clear();
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Delete All Encomes")));
     }
   }
 }

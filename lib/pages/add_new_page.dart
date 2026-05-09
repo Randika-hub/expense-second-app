@@ -81,7 +81,7 @@ class _AddNewPageState extends State<AddNewPage> {
                     padding: const EdgeInsets.all(12.0),
                     child: Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.09,
+                      height: MediaQuery.of(context).size.height * 0.07,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: Colors.white,

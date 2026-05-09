@@ -43,12 +43,21 @@ class UserServices {
   }
 
   //get the data user
- static Future<Map<String, String>> getcarKey() async {
+  static Future<Map<String, String>> getcarKey() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     String? userData = pref.getString("Name");
     String? userEmail = pref.getString("Email");
 
     return {"Name": userData!, "Email": userEmail!};
+  }
+
+  //remove siyalla
+
+  static Future<void> removeUserData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    pref.remove("Name");
+    pref.remove("Email");
   }
 }

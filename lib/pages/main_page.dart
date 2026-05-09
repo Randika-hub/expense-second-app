@@ -65,9 +65,11 @@ class _MainPageState extends State<MainPage> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        duration: const Duration(seconds: 3),
         content: const Text("Expence was deleted!"),
         action: SnackBarAction(
           label: "undo",
+
           onPressed: () {
             setState(() {
               db.expenceList.insert(currentExpenceIndex, expence);
@@ -111,10 +113,40 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  //
+  Map<ExpenceCatogory, double> totalExpenceCatogoryAmount() {
+    Map<ExpenceCatogory, double> totalExpencesCatogory = {
+      ExpenceCatogory.food: 0,
+      ExpenceCatogory.health: 0,
+      ExpenceCatogory.shopping: 0,
+      ExpenceCatogory.subscriptions: 0,
+      ExpenceCatogory.transport: 0,
+    };
+    for (ExpenceModel item in db.expenceList) {
+      totalExpencesCatogory[item.expenceCatogory] =
+          totalExpencesCatogory[item.expenceCatogory]! + item.expenceAmount;
+    }
+    return totalExpencesCatogory;
+  }
+
+  Map<EncomeCatogory, double> totalEncomeCatogoryPieData() {
+    Map<EncomeCatogory, double> totalEncomeCatogory = {
+      EncomeCatogory.freelancing: 0,
+      EncomeCatogory.other: 0,
+      EncomeCatogory.passive: 0,
+      EncomeCatogory.salary: 0,
+    };
+    for (EncomeModel encomeItems in incomedb.encomeList) {
+      totalEncomeCatogory[encomeItems.catogory] =
+          totalEncomeCatogory[encomeItems.catogory]! + encomeItems.amount;
+    }
+    return totalEncomeCatogory;
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      const HomePage(),
+      HomePage(expencList: db.expenceList, encomeList: incomedb.encomeList),
       TransectionPage(
         expenceList: db.expenceList,
         encomeList: incomedb.encomeList,
@@ -122,7 +154,10 @@ class _MainPageState extends State<MainPage> {
         expenceDelete: removeExpence,
       ),
       AddNewPage(expenceAdd: onGarrige, encomeAdd: encomeGariige),
-      const BudgetPage(),
+      BudgetPage(
+        expenceCatogoryListPieChart: totalExpenceCatogoryAmount(),
+        encomeCatogoryListPieChart: totalEncomeCatogoryPieData(),
+      ),
       const ProfilePage(),
     ];
     return Scaffold(

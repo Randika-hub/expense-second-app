@@ -44,59 +44,84 @@ class _TransectionPageState extends State<TransectionPage> {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
               Expanded(
-                child: ListView.builder(
-                  // physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: widget.expenceList.length,
-                  itemBuilder: (context, index) {
-                    final expence = widget.expenceList[index];
-                    return Dismissible(
-                      key: ValueKey(expence),
-                      direction: DismissDirection.startToEnd,
-                      onDismissed: (direction) {
-                        widget.expenceDelete(expence);
-                      },
-                      child: ExpenceCard(
-                        expenceCatogory: expence.expenceCatogory,
-                        expenceTitle: expence.expenceTitle,
-                        expenceDescription: expence.expenceDescription,
-                        expenceAmount: expence.expenceAmount,
-                        expenceDate: expence.expenceDate,
-                        expenceTime: expence.expenceTime,
+                child: widget.expenceList.isEmpty
+                    ? const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          " if you add the expences for your expence list, you can see your expences this...",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purpleAccent,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        // physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: widget.expenceList.length,
+                        itemBuilder: (context, index) {
+                          final expence = widget.expenceList[index];
+                          return Dismissible(
+                            key: ValueKey(expence),
+                            direction: DismissDirection.startToEnd,
+                            onDismissed: (direction) {
+                              widget.expenceDelete(expence);
+                            },
+                            child: ExpenceCard(
+                              expenceCatogory: expence.expenceCatogory,
+                              expenceTitle: expence.expenceTitle,
+                              expenceDescription: expence.expenceDescription,
+                              expenceAmount: expence.expenceAmount,
+                              expenceDate: expence.expenceDate,
+                              expenceTime: expence.expenceTime,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
               sizeSpacerHeight1,
               const Text(
                 "Encome",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
+
               Expanded(
-                child: ListView.builder(
-                  // physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: widget.encomeList.length,
-                  itemBuilder: (context, index) {
-                    final encome = widget.encomeList[index];
-                    return Dismissible(
-                      key: ValueKey(encome),
-                      direction: DismissDirection.startToEnd,
-                      onDismissed: (direction) {
-                        widget.encomeDelete(encome);
-                      },
-                      child: EncomeCard(
-                        catogory: encome.catogory,
-                        title: encome.title,
-                        description: encome.description,
-                        amount: encome.amount,
-                        date: encome.date,
-                        time: encome.time,
+                child: widget.encomeList.isEmpty
+                    ? const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          " if you add the encomes for your encome list, you can see your encomes this...",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purpleAccent,
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        // physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: widget.encomeList.length,
+                        itemBuilder: (context, index) {
+                          final encome = widget.encomeList[index];
+                          return Dismissible(
+                            key: ValueKey(encome),
+                            direction: DismissDirection.startToEnd,
+                            onDismissed: (direction) {
+                              widget.encomeDelete(encome);
+                            },
+                            child: EncomeCard(
+                              catogory: encome.catogory,
+                              title: encome.title,
+                              description: encome.description,
+                              amount: encome.amount,
+                              date: encome.date,
+                              time: encome.time,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ],
           ),

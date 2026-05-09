@@ -92,10 +92,10 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
                   ),
                 ),
                 Positioned(
-                  right: 20,
-                  left: 20,
-                  top: 650,
-                  bottom: 27,
+                  right: MediaQuery.of(context).size.width * 0.08,
+                  left: MediaQuery.of(context).size.width * 0.08,
+                  top: MediaQuery.of(context).size.height * 0.90,
+                  bottom: MediaQuery.of(context).size.height * 0.02,
                   child: GestureDetector(
                     onTap: () {
                       !showforPage

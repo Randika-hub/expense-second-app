@@ -10,14 +10,14 @@ class Database {
   // initialize now data
   void createInitialDataBase() {
     expenceList = [
-      ExpenceModel(
-        expenceTitle: "apple",
-        expenceDescription: "I like to eate apple",
-        expenceAmount: 55,
-        expenceDate: DateTime.now(),
-        expenceTime: DateTime.now(),
-        expenceCatogory: ExpenceCatogory.food,
-      ),
+      // ExpenceModel(
+      //   expenceTitle: "apple",
+      //   expenceDescription: "I like to eate apple",
+      //   expenceAmount: 55,
+      //   expenceDate: DateTime.now(),
+      //   expenceTime: DateTime.now(),
+      //   expenceCatogory: ExpenceCatogory.food,
+      // ),
     ];
   }
 
@@ -40,6 +40,19 @@ class Database {
       ScaffoldMessenger.of(
         contex,
       ).showSnackBar(const SnackBar(content: Text("save your Expence")));
+    }
+  }
+
+  Future<void> removeExpencesaHiveDataBase(BuildContext context) async {
+    var mybox = Hive.box("ExpenecDatabase");
+    await mybox.clear();
+
+    expenceList.clear();
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Delete All Expences")));
     }
   }
 }

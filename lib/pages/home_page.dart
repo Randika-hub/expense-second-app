@@ -1,10 +1,21 @@
 import 'package:expenseapp/const_things.dart';
 import 'package:expenseapp/customs/custom_appbar_container.dart';
+import 'package:expenseapp/models/expence_model.dart';
+import 'package:expenseapp/models/income_model.dart';
 import 'package:expenseapp/user_services/user_services.dart';
+import 'package:expenseapp/widgets/Expence_card.dart';
+import 'package:expenseapp/widgets/encome_card.dart';
+import 'package:expenseapp/widgets/linechart.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List<ExpenceModel> expencList;
+  final List<EncomeModel> encomeList;
+  const HomePage({
+    super.key,
+    required this.expencList,
+    required this.encomeList,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -12,6 +23,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String userName = "";
+  double expenceTotal = 0;
+  double encomeTotal = 0;
 
   @override
   void initState() {
@@ -22,6 +35,14 @@ class _HomePageState extends State<HomePage> {
         });
       }
     });
+
+    for (var i = 0; i < widget.expencList.length; i++) {
+      expenceTotal += widget.expencList[i].expenceAmount;
+    }
+
+    for (var en = 0; en < widget.encomeList.length; en++) {
+      encomeTotal += widget.encomeList[en].amount;
+    }
     super.initState();
   }
 
@@ -30,10 +51,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            //main column
+          child: Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //sub bg color Column
                 SizedBox(
@@ -82,32 +102,34 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               sizeSpacerWidth2,
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.notifications,
-                                  size: 30,
-                                  color: Colors.pink,
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.notifications,
+                                    // size: 30,
+                                    color: Colors.pink,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           sizeSpacerHeight2,
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Expanded(
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   CustomAppbarContainer(
-                                    amount: 20,
+                                    amount: encomeTotal,
                                     containerBGColor: Colors.green,
                                     imagUrl: "assets/images/income.png",
                                     title: "Incomes",
                                   ),
                                   CustomAppbarContainer(
-                                    amount: 2500,
+                                    amount: expenceTotal,
                                     containerBGColor: Colors.red,
                                     imagUrl: "assets/images/expense.png",
                                     title: "Expences",
@@ -122,7 +144,99 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 sizeSpacerHeight1,
-                const Text("data"),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Spend Frequency",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                      sizeSpacerHeight1,
+                      const Linechart(),
+                      sizeSpacerHeight1,
+
+                      const Text(
+                        "Recent Expences",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                      widget.expencList.isEmpty
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                " if you add the expences for your expence list, you can see your expences this...",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.purpleAccent,
+                                ),
+                              ),
+                            )
+                          : ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: widget.expencList.length,
+                              itemBuilder: (context, index) {
+                                final expence = widget.expencList[index];
+                                return ExpenceCard(
+                                  expenceCatogory: expence.expenceCatogory,
+                                  expenceTitle: expence.expenceTitle,
+                                  expenceDescription:
+                                      expence.expenceDescription,
+                                  expenceAmount: expence.expenceAmount,
+                                  expenceDate: expence.expenceDate,
+                                  expenceTime: expence.expenceTime,
+                                );
+                              },
+                            ),
+                      sizeSpacerHeight2,
+                      const Text(
+                        "Recent Encomes",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
+                      ),
+                      sizeSpacerHeight1,
+                      widget.encomeList.isEmpty
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                " if you add the encomes for your encome list, you can see your encomes this...",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.purpleAccent,
+                                ),
+                              ),
+                            )
+                          : ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: widget.encomeList.length,
+                              itemBuilder: (context, index) {
+                                final encome = widget.encomeList[index];
+                                return EncomeCard(
+                                  catogory: encome.catogory,
+                                  title: encome.title,
+                                  description: encome.description,
+                                  amount: encome.amount,
+                                  date: encome.date,
+                                  time: encome.time,
+                                );
+                              },
+                            ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

@@ -22,8 +22,8 @@ class _CustomAppbarContainerState extends State<CustomAppbarContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 70,
+      width: MediaQuery.of(context).size.width * 0.42,
+      height: MediaQuery.of(context).size.height * 0.11,
       decoration: BoxDecoration(
         color: widget.containerBGColor,
         borderRadius: BorderRadius.circular(15),

@@ -10,14 +10,15 @@ class OnBoardingScreensData {
 
     OnBoardingScreensModel(
       screenImageurl: "assets/images/onboard_2.png",
-      screenTitle: 'Gain total control\n of your money',
-      screensubTitle: 'Become your own money manager and make every cent count',
+      screenTitle: 'Know where your money goes',
+      screensubTitle:
+          'Track your transaction easily, with categories and financial report',
     ),
 
     OnBoardingScreensModel(
       screenImageurl: "assets/images/onboard_3.png",
-      screenTitle: 'Gain total control\n of your money',
-      screensubTitle: 'Become your own money manager and make every cent count',
+      screenTitle: 'Planning ahead',
+      screensubTitle: 'Setup your budget for each category so you in control',
     ),
   ];
 }
